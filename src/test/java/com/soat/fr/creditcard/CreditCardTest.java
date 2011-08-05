@@ -50,6 +50,7 @@ public class CreditCardTest {
 		testNumbers.put("Visa", "4111111111111110");
 		testNumbers.put("Visa", "4012888888881880");
 		testNumbers.put("Visa", "4222222222222");
+                testNumbers.put("En route", "201400000000009"); 
 	}
 
 	@Test
