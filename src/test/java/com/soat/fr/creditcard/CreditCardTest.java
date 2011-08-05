@@ -58,7 +58,6 @@ public class CreditCardTest {
 		Collection<String> testCardNumberValues = testInvalidNumbers.values();
                 for (String testCardNumberValue : testCardNumberValues) {
                       boolean validCC = CreditCardTool.INSTANCE.isCreditCardValid(testCardNumberValue);
-			System.out.println(">>> "+validCC);
                       assertFalse(validCC);
                 }
 	}
@@ -68,7 +67,6 @@ public class CreditCardTest {
 		Collection<String> testCardNumberValues = testValidNumbers.values();
 		for (String testCardNumberValue : testCardNumberValues) {
 			boolean validCC = CreditCardTool.INSTANCE.isCreditCardValid(testCardNumberValue);
-			System.out.println(">>> "+validCC);
 			assertTrue(validCC);
 		}
 	}
