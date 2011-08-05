@@ -35,37 +35,40 @@ import org.junit.Test;
 
 public class CreditCardTest {
 
-	Map<String, String> testNumbers = new HashMap<String, String>();
+	Map<String, String> testValidNumbers = new HashMap<String, String>();
+        Map<String, String> testInvalidNumbers = new HashMap<String, String>();
 
 	@Before
 	public void setUp() throws Exception {
-		testNumbers.put("American Express", "378282246310005");
-		testNumbers.put("American Express", "371449635398431");
-		testNumbers.put("American Express Corporate", "378734493671000");
-		testNumbers.put("Diners Club", "30569309025904");
-		testNumbers.put("Diners Club", "30569309025905");
-		testNumbers.put("Diners Club", "38520000023237");
-		testNumbers.put("MasterCard", "5555555555554440");
-		testNumbers.put("MasterCard", "5105105105105100");
-		testNumbers.put("Visa", "4111111111111110");
-		testNumbers.put("Visa", "4012888888881880");
-		testNumbers.put("Visa", "4222222222222");
-                testNumbers.put("En route", "201400000000009"); 
+		testValidNumbers.put("American Express", "371449635398431");
+		testValidNumbers.put("American Express Corporate", "378734493671000");
+		testValidNumbers.put("Diners Club", "38520000023237");
+		testValidNumbers.put("MasterCard", "5105105105105100");
+		testValidNumbers.put("Visa", "4222222222222");
+
+                testInvalidNumbers.put("American Express", "371449635398432");
+                testInvalidNumbers.put("American Express Corporate", "378734493671001");
+                testInvalidNumbers.put("Diners Club", "38520000023238");
+                testInvalidNumbers.put("MasterCard", "5105105105105101");
+                testInvalidNumbers.put("Visa", "4222222222223");
 	}
 
 	@Test
 	public void testInvalidCC() {
-		boolean validCC = CreditCardTool.INSTANCE.isCreditCardValid("12345");
-		assertFalse(validCC);
-		validCC = CreditCardTool.INSTANCE.isCreditCardValid("999999999999999");
-		assertFalse(validCC);
+		Collection<String> testCardNumberValues = testInvalidNumbers.values();
+                for (String testCardNumberValue : testCardNumberValues) {
+                      boolean validCC = CreditCardTool.INSTANCE.isCreditCardValid(testCardNumberValue);
+			System.out.println(">>> "+validCC);
+                      assertFalse(validCC);
+                }
 	}
 
 	@Test
 	public void testValidCC() {
-		Collection<String> testCardNumberValues = testNumbers.values();
+		Collection<String> testCardNumberValues = testValidNumbers.values();
 		for (String testCardNumberValue : testCardNumberValues) {
 			boolean validCC = CreditCardTool.INSTANCE.isCreditCardValid(testCardNumberValue);
+			System.out.println(">>> "+validCC);
 			assertTrue(validCC);
 		}
 	}
